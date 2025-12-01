@@ -1,0 +1,10 @@
+-- DropForeignKey
+ALTER TABLE `peca` DROP FOREIGN KEY `Peca_aeronaveId_fkey`;
+
+-- AlterTable
+ALTER TABLE `peca` MODIFY `tipo` ENUM('IMPORTADA', 'NACIONAL') NOT NULL,
+    MODIFY `status` ENUM('EM_PRODUCAO', 'PRONTA', 'EM_TRANSPORTE') NOT NULL DEFAULT 'EM_PRODUCAO',
+    MODIFY `aeronaveId` INTEGER NULL;
+
+-- AddForeignKey
+ALTER TABLE `Peca` ADD CONSTRAINT `Peca_aeronaveId_fkey` FOREIGN KEY (`aeronaveId`) REFERENCES `Aeronave`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

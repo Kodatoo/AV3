@@ -1,0 +1,21 @@
+GET http://localhost:3333/ping
+
+### 
+POST http://localhost:3333/aeronaves/cadastro
+Content-Type: application/json
+{
+  "modelo": "Boeing 737",
+  "fabricante": "Boeing",
+  "capacidade": 180,
+  "tipo": "Comercial"
+}
+###
+POST http://localhost:3333/aeronaves
+Content-Type: application/json
+
+{
+  "modelo": "Boeing 737",
+  "fabricante": "Boeing",
+  "capacidade": 180,
+  "tipo": "Comercial"
+}

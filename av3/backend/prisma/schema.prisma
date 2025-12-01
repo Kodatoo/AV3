@@ -1,0 +1,129 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum TipoAeronave {
+  COMERCIAL
+  MILITAR
+}
+
+enum TipoPeca {
+  IMPORTADA
+  NACIONAL
+}
+
+enum StatusPeca {
+  EM_PRODUCAO
+  PRONTA
+  EM_TRANSPORTE
+}
+
+enum StatusEtapa {
+  CONCLUIDA
+  EM_ANDAMENTO
+  PENDENTE
+}
+
+enum NivelPermissao {
+  ADMINISTRADOR
+  ENGENHEIRO
+  OPERADOR
+}
+
+enum TipoTeste {
+  ELETRICO
+  HIDRAULICO
+  AERODINAMICO
+}
+
+enum ResultadoTeste {
+  APROVADO
+  REPROVADO
+}
+
+model Aeronave {
+  id         Int          @id @default(autoincrement())
+  codigo     String       @default(uuid()) @unique
+  modelo     String
+  fabricante String
+  tipo       TipoAeronave
+  capacidade Int
+  alcance    Int?
+
+  pecas      Peca[]
+  etapas     Etapa[]
+  testes     Teste[]
+  relatorio  Relatorio?
+}
+
+
+model Peca {
+  id         Int        @id @default(autoincrement())
+  nome       String
+  codigo     String     @default(uuid()) @unique
+  tipo       TipoPeca
+  fornecedor String
+  status     StatusPeca @default(EM_PRODUCAO)
+
+  aeronave   Aeronave?  @relation(fields: [aeronaveId], references: [id])
+  aeronaveId Int?
+}
+
+model Etapa {
+  id           Int            @id @default(autoincrement())
+  nome         String
+  responsavel  String
+  status       StatusEtapa    @default(PENDENTE)
+  dataInicial  DateTime
+  dataFinal    DateTime
+
+  aeronave     Aeronave?      @relation(fields: [aeronaveId], references: [id])
+  aeronaveId   Int?
+
+  funcionarios EtapaFuncionario[]
+}
+
+model Funcionario {
+  id             Int                @id @default(autoincrement())
+  nome           String
+  telefone       String
+  endereco       String
+  usuario        String  @unique
+  senha          String
+  nivelPermissao NivelPermissao
+
+  etapas         EtapaFuncionario[]
+}
+
+model Teste {
+  id         Int          @id @default(autoincrement())
+  tipo       TipoTeste
+  resultado  ResultadoTeste
+  data       DateTime?
+
+  aeronave   Aeronave     @relation(fields: [aeronaveId], references: [id])
+  aeronaveId Int
+}
+
+model Relatorio {
+  id         Int      @id @default(autoincrement())
+  criadoEm   DateTime @default(now())
+
+  aeronave   Aeronave @relation(fields: [aeronaveId], references: [id])
+  aeronaveId Int      @unique
+}
+
+model EtapaFuncionario {
+  etapaId       Int
+  funcionarioId Int
+
+  etapa       Etapa       @relation(fields: [etapaId], references: [id])
+  funcionario Funcionario @relation(fields: [funcionarioId], references: [id])
+
+  @@id([etapaId, funcionarioId])
+}

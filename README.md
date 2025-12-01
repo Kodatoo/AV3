@@ -1,7 +1,7 @@
 # AeroCode - README
 
 ## 🚀 Como rodar o projeto
-
+⚠️ Importante: Para rodar o Frontend e o Backend ao mesmo tempo, é recomendado abrir dois terminais separados, um para cada parte do projeto.
 ---
 
 # 📌 FRONTEND

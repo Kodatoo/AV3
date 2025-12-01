@@ -1,37 +1,55 @@
 # AeroCode - README
 
 ## 🚀 Como rodar o projeto
-⚠️ Importante: Para rodar o Frontend e o Backend ao mesmo tempo, é recomendado abrir dois terminais separados, um para cada parte do projeto.
+
+> **⚠️ Importante:** Para rodar o Frontend e o Backend ao mesmo tempo, é recomendado abrir **dois terminais separados**, um para cada parte do projeto.
+
 ---
 
 # 📌 FRONTEND
 
-### **1. Acessar a pasta do front**
+### **1. Acessar a pasta principal**
 
 ```bash
 cd av3
 ```
 
-### **2. Instalar dependências**
+### **2. Acessar a pasta do front**
+
+```bash
+cd frontend
+```
+
+### **3. Instalar dependências**
 
 ```bash
 npm i
 ```
 
-### **3. Rodar o projeto**
+### **4. Rodar o projeto**
 
 ```bash
 npm run dev
 ```
 
+````
+
 ---
 
 # 📌 BACKEND
 
-### **1. Acessar a pasta do back**
-
+### **1. Acessar a pasta principal**
 ```bash
 cd av3
+````
+
+### **2. Acessar a pasta do back**
+
+```bash
+cd backend
+```
+
+```
 ```
 
 ### **2. Instalar dependências**
@@ -43,7 +61,6 @@ npm i
 ### **3. Criar o arquivo `.env` na raiz do backend**
 
 Configure suas variáveis de ambiente conforme necessário.
-DATABASE_URL="mysql://USUARIO:SENHA@localhost:3306/aerocode" <-- Nesse modelo
 
 ### **4. Rodar migrações do Prisma**
 

@@ -65,7 +65,7 @@ Configure suas variáveis de ambiente conforme necessário.
 ### **4. Rodar migrações do Prisma**
 
 ```bash
-npx prisma migrate dev
+npx prisma migrate dev --name init
 ```
 
 ### **5. Executar seed do banco**
